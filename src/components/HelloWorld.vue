@@ -4,7 +4,7 @@
     <h2>Essential Links</h2>
     <ul>
       <li>
-        <a href="https://vuejs.org" target="_blank">Core Docs</a>
+        <a @click="go" target="_blank">axios</a>
       </li>
       <li>
         <a href="https://forum.vuejs.org" target="_blank">Forum</a>
@@ -52,7 +52,10 @@ export default {
   methods: {
     init: function() {
       console.log(1);
-    }
+    },
+    go:function(){
+      this.$router.push({name:"axiosPage"});
+    },
   }
 };
 </script>
