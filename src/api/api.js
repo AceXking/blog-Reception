@@ -14,6 +14,8 @@ const getList = (params) => {
 const apiUrl = {
 	'login': '/api/user/login', // 登录
 	'getList': '/api/blog/list', // 获取列表
+	'addBlog': '/api/blog/new', // 新建博客
+	'editBlog': '/api/blog/update', // 更新博客
 	'delBlog': '/api/blog/del' // 删除博客
 }
 const methodStr = {
