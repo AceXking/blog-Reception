@@ -31,20 +31,19 @@ export default {
     },
     methods: {
       // 登录
-      login() {
-        this.loginCheck()
-        .then(res => {
-          if (res) {
-            axiosData('post', 'login', this.form).then(res => {
-              if (res.data.code === 0) {
-                this.$message('登录成功');
-                this.$router.push('list')
-              } else {
-                this.$message(res.data.message)
-              }
-            })
-          }
-        })
+      async login() {
+        const res = await this.loginCheck()
+        if (res) {
+          axiosData('post', 'login', this.form).then(res => {
+            console.log(res)
+            if (res.data.code === 0) {
+              this.$message('登录成功');
+              this.$router.push('list')
+            } else {
+              this.$message(res.data.msg)
+            }
+          })
+        }
       },
       // 登录验证
       loginCheck() {
