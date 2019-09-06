@@ -1,7 +1,7 @@
 import { get, post } from '../conf/http.js'
 
 // 获取列表
-const getList = (params) => {
+const getList = (params) => { 
 	return new Promise((resolve, reject) => {
 		get('/api/blog/list', params).then(listData => {
 			resolve(listData)
