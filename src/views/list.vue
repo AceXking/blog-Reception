@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { axiosData } from '../api/api.js'
+import { getList, addBlog, editBlog, delBlog } from '../api/blog'
 export default {
 
   name: 'list',
@@ -66,7 +66,8 @@ export default {
   methods: {
     // 获取列表
     init() {
-      axiosData('get','getList',this.queryData).then(res => {
+      // console.log(getList);return;
+      this.$http('get', getList,this.queryData).then(res => {
         if (res.status === 200) {
           this.listData = res.data.data
         }
@@ -91,7 +92,7 @@ export default {
     delBlog(id) {
       this.confirmCheck('确定要删除吗？').then(res => {
         if (res) {
-          axiosData('post','delBlog',{'id':id}).then(res => {
+          this.$http('post', delBlog,{'id':id}).then(res => {
             if (res.data.code === 0) {
               this.$message(res.data.message)
               this.init()
@@ -128,7 +129,7 @@ export default {
         return
       }
       if (this.title === '新增博客') {
-        axiosData('post', 'addBlog', this.addData)
+        this.$http('post', addBlog, this.addData)
         .then(res => {
           if (res.data.code === 0) {
             this.$message({
@@ -142,7 +143,7 @@ export default {
           }
         })
       } else {
-        axiosData('post', 'editBlog', this.addData)
+        this.$http('post', editBlog, this.addData)
         .then(res => {
           if (res.data.code === 0) {
             this.$message({

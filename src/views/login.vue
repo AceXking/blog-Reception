@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { axiosData } from '../api/api.js'
+import { login } from '../api/user'
 export default {
 
     name: 'login',
@@ -34,15 +34,18 @@ export default {
       async login() {
         const res = await this.loginCheck()
         if (res) {
-          axiosData('post', 'login', this.form).then(res => {
-            console.log(res)
-            if (res.data.code === 0) {
+          try {
+            const loginRes = await this.$http('post', login, this.form)
+            console.log(loginRes)
+            if (loginRes.data.code === 0) {
               this.$message('登录成功');
               this.$router.push('list')
             } else {
-              this.$message(res.data.msg)
+              this.$message(loginRes.data.message)
             }
-          })
+          } catch(err) {
+            console.error(err)
+          }
         }
       },
       // 登录验证
